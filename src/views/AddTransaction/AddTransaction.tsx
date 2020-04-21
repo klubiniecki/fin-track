@@ -215,34 +215,13 @@ const AddTransaction = () => {
           inputProps={{ id: "category" }}
           margin="dense"
         >
-          {type === "expense" &&
-            TransactionCategories.filter((t) => t.type === "expense").map(
-              ({ name }, i) => (
-                <MenuItem key={i} value={name}>
-                  {name}
-                </MenuItem>
-              )
-            )}
-          {type === "income" &&
-            TransactionCategories.filter((t) => t.type === "income").map(
-              ({ name }, i) => {
-                return (
-                  <MenuItem key={i} value={name}>
-                    {name}
-                  </MenuItem>
-                );
-              }
-            )}
-          {type === "saving" &&
-            TransactionCategories.filter((t) => t.type === "saving").map(
-              ({ name }, i) => {
-                return (
-                  <MenuItem key={i} value={name}>
-                    {name}
-                  </MenuItem>
-                );
-              }
-            )}
+          {TransactionCategories.filter((t) => t.type === type).map(
+            ({ name }, i) => (
+              <MenuItem key={i} value={name}>
+                {name}
+              </MenuItem>
+            )
+          )}
         </Select>
       </FormControl>
       <TextField

@@ -13,7 +13,7 @@ import Dashboard from "../../views/Dashboard/Dashboard";
 import Transactions from "../../views/Transactions/Transactions";
 
 const App = () => {
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(0);
 
   const renderPage = () => {
     if (value === 1) {
