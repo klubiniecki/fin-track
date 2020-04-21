@@ -4,6 +4,9 @@ const RequestService = () => {
     try {
       const res = await fetch(url, options);
       data = await res.json();
+      if (!res.ok) {
+        error = "Nothing here!";
+      }
     } catch (err) {
       error = err;
     }

@@ -61,12 +61,24 @@ const MonthlyTransactions = ({
     fetchTransactions();
   }, [fetchTransactions]);
 
-  if (!transactions.length) {
-    return <LinearProgress className={styles.loader} />;
+  if (error) {
+    return (
+      <Box className={styles.box}>
+        <Typography className={styles.month} color="textPrimary">
+          {monthName}
+          <EventIcon className={styles.icon} />
+        </Typography>
+        <Card>
+          <CardContent>
+            <span>{error}</span>
+          </CardContent>
+        </Card>
+      </Box>
+    );
   }
 
-  if (error) {
-    return <span>Oops!</span>;
+  if (!transactions.length) {
+    return <LinearProgress className={styles.loader} />;
   }
 
   const handleDeleteTransaction = (
