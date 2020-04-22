@@ -78,7 +78,7 @@ const AddTransaction = () => {
     form: {
       display: "flex",
       flexDirection: "column",
-      paddingTop: 30,
+      paddingTop: 10,
     },
     button: {
       backgroundColor: color,
