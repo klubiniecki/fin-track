@@ -10,7 +10,7 @@ import {
 import DeleteIcon from "@material-ui/icons/DeleteTwoTone";
 import TransactionCategories from "./TransactionCategories";
 import { TransactionInterface } from "../../types/types";
-import getDisplayDate from "../../utils/getDisplayDate";
+import getDisplayDate from "../../utils/getDisplayDate/getDisplayDate";
 import useStyles from "../../utils/useStyles";
 
 interface Props {
