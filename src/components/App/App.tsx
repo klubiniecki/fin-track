@@ -28,14 +28,14 @@ const App = () => {
   const styles = useStyles({
     nav: {
       position: "fixed",
-      top: 0,
+      bottom: 0,
       left: 0,
       right: 0,
       boxShadow: `0 1px 10px rgba(0,0,0,.1)`,
     },
     wrapper: {
-      marginTop: 70,
-      marginBottom: 20,
+      paddingTop: 10,
+      paddingBottom: 70,
     },
   });
 

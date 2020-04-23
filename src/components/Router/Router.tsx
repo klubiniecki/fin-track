@@ -5,7 +5,7 @@ import config from "../../config/config";
 
 const Router = () => {
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   useEffect(() => {
     if (password === config.password) {
