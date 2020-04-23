@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { CssBaseline } from "@material-ui/core";
-import Router from "./components/Router/Router";
+import App from "./components/App/App";
 
 ReactDOM.render(
   <CssBaseline>
-    <Router />
+    <App />
   </CssBaseline>,
   document.getElementById("root")
 );
