@@ -8,7 +8,7 @@ const getDisplayDate = (dateString: string) => {
   const num = new Date(dateString).getDay();
   const day = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(num);
 
-  return `${date}, ${day}`;
+  return `${date}, ${day} sdjfsdpio`;
 };
 
 export default getDisplayDate;
