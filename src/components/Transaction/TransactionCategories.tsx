@@ -22,19 +22,27 @@ export interface TransactionCategoryAndIcon {
 
 const TransactionCategories: TransactionCategoryAndIcon[] = [
   { name: "Groceries", icon: <ShoppingBasket />, type: "expense" },
-  { name: "Home", icon: <Home />, type: "expense" },
+  { name: "Rent", icon: <Home />, type: "expense" },
   { name: "Fun", icon: <InsertEmoticon />, type: "expense" },
-  { name: "Baby", icon: <FavoriteBorder />, type: "expense" },
+  { name: "Gaia", icon: <FavoriteBorder />, type: "expense" },
   { name: "Car", icon: <DirectionsCar />, type: "expense" },
-  { name: "Health", icon: <LocalHospital />, type: "expense" },
-  { name: "Cosmetics", icon: <ColorLens />, type: "expense" },
+  { name: "Medical", icon: <LocalHospital />, type: "expense" },
+  { name: "Wellness", icon: <ColorLens />, type: "expense" },
   { name: "Travel", icon: <FlightTakeoff />, type: "expense" },
+  { name: "Utilities", icon: <OtherExpense />, type: "expense" },
+  { name: "Restaurant", icon: <OtherExpense />, type: "expense" },
+  { name: "Household", icon: <OtherExpense />, type: "expense" },
+  { name: "Clothes", icon: <OtherExpense />, type: "expense" },
+  { name: "Subscriptions", icon: <OtherExpense />, type: "expense" },
   { name: "Other", icon: <OtherExpense />, type: "expense" },
   { name: "Salary", icon: <Salary />, type: "income" },
   { name: "Sales", icon: <Sales />, type: "income" },
   { name: "Other", icon: <OtherIncome />, type: "income" },
-  { name: "Savings", icon: <Saving />, type: "saving" },
+  { name: "Yearly", icon: <Saving />, type: "saving" },
+  { name: "Regular", icon: <Saving />, type: "saving" },
+  { name: "Travel", icon: <Saving />, type: "saving" },
   { name: "Gaia", icon: <Saving />, type: "saving" },
+  { name: "Other", icon: <Saving />, type: "saving" },
 ];
 
 export default TransactionCategories;
