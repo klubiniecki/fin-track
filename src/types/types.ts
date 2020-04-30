@@ -4,23 +4,19 @@ export interface TransactionInterface {
   amount: number;
   date: string;
   category: TransactionCategory;
-  type: TransactionType;
   regular: boolean;
 }
 
 export interface ExpenseInterface extends TransactionInterface {
   category: ExpenseCategory;
-  type: "expense";
 }
 
 export interface IncomeInterface extends TransactionInterface {
   category: IncomeCategory;
-  type: "income";
 }
 
 export interface SavingInterface extends TransactionInterface {
   category: SavingCategory;
-  type: "saving";
 }
 
 export type TransactionType = "expense" | "income" | "saving";

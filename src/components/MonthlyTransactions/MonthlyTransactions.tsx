@@ -13,6 +13,7 @@ import config from "../../config/config";
 import RequestService from "../../services/requestService";
 import useStyles from "../../utils/useStyles";
 import EventIcon from "@material-ui/icons/EventTwoTone";
+import getTypeFromCategory from "../../utils/getTypeFromCategory";
 
 interface Props {
   startDate: string;
@@ -27,7 +28,9 @@ const MonthlyTransactions = ({
   monthName,
   onDeleteTransaction,
 }: Props) => {
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState<
+    null | TransactionInterface[]
+  >(null);
   const [error, setError] = useState(null);
 
   const styles = useStyles({
@@ -70,15 +73,31 @@ const MonthlyTransactions = ({
         </Typography>
         <Card>
           <CardContent>
-            <span>{error}</span>
+            <span>Oops! Something went wrong.</span>
           </CardContent>
         </Card>
       </Box>
     );
   }
 
-  if (!transactions.length) {
+  if (!transactions) {
     return <LinearProgress className={styles.loader} />;
+  }
+
+  if (!transactions.length) {
+    return (
+      <Box className={styles.box}>
+        <Typography className={styles.month} color="textPrimary">
+          {monthName}
+          <EventIcon className={styles.icon} />
+        </Typography>
+        <Card>
+          <CardContent>
+            <span>No transactions in {monthName}.</span>
+          </CardContent>
+        </Card>
+      </Box>
+    );
   }
 
   const handleDeleteTransaction = (
@@ -103,7 +122,12 @@ const MonthlyTransactions = ({
             {transactions.map((t: TransactionInterface) => (
               <Transaction
                 key={t._id}
-                onDelete={() => handleDeleteTransaction(t._id, t.type)}
+                onDelete={() =>
+                  handleDeleteTransaction(
+                    t._id,
+                    getTypeFromCategory(t.category)
+                  )
+                }
                 transaction={t}
               />
             ))}

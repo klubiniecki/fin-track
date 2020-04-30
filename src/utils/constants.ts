@@ -1,3 +1,5 @@
+import { ExpenseCategory } from "../types/types";
+
 export const monthNames = [
   "January",
   "February",
@@ -13,7 +15,7 @@ export const monthNames = [
   "December",
 ];
 
-export const EXPENSE_CATEGORIES = [
+export const EXPENSE_CATEGORIES: ExpenseCategory[] = [
   "Groceries",
   "Rent",
   "Utilities",

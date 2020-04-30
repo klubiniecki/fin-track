@@ -10,8 +10,9 @@ import {
 import DeleteIcon from "@material-ui/icons/DeleteTwoTone";
 import TransactionCategories from "./TransactionCategories";
 import { TransactionInterface } from "../../types/types";
-import getDisplayDate from "../../utils/getDisplayDate/getDisplayDate";
+import getDisplayDate from "../../utils/getDisplayDate";
 import useStyles from "../../utils/useStyles";
+import getTypeFromCategory from "../../utils/getTypeFromCategory";
 
 interface Props {
   transaction: TransactionInterface;
@@ -19,8 +20,9 @@ interface Props {
 }
 
 const Transaction = ({ transaction, onDelete }: Props) => {
-  const { _id, name, amount, category, date, type } = transaction;
+  const { _id, name, amount, category, date } = transaction;
   const [selected, setSelected] = useState(false);
+  const type = getTypeFromCategory(category);
 
   const getIcon = () =>
     selected ? (
