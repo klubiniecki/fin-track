@@ -18,17 +18,13 @@ interface Props {
   type: "bar" | "pie";
 }
 
-const CategoryBarChart = ({ transactions, categories, type }: Props) => {
+const CategoryChart = ({ transactions, categories, type }: Props) => {
   const data = categories
     .map((category) => {
-      const expenseAmounts = transactions
-        .filter((item) => item.category === category)
-        .map((item) => item.amount);
-
-      const amount = expenseAmounts.length
-        ? expenseAmounts.reduce((a, b) => a + b)
-        : 0;
-
+      const amounts = transactions
+        .filter((i) => i.category === category)
+        .map((i) => i.amount);
+      const amount = amounts.length ? amounts.reduce((a, b) => a + b) : 0;
       return {
         category,
         amount,
@@ -36,19 +32,16 @@ const CategoryBarChart = ({ transactions, categories, type }: Props) => {
     })
     .filter((data) => data.amount > 0);
 
+  const randomHSL = () => `hsla(${~~(360 * Math.random())},70%,70%,0.8)`;
   const COLORS = data.map((_) => randomHSL());
 
-  function randomHSL() {
-    return `hsla(${~~(360 * Math.random())},70%,70%,0.8)`;
-  }
+  const cell = data.map((_, index) => (
+    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+  ));
 
   const barChart = (
     <BarChart data={data} margin={{ top: 0, bottom: 0, right: 0, left: -25 }}>
-      <Bar dataKey="amount">
-        {data.map((_, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Bar>
+      <Bar dataKey="amount">{cell}</Bar>
       <XAxis dataKey="category" />
       <YAxis />
       <Tooltip />
@@ -57,7 +50,6 @@ const CategoryBarChart = ({ transactions, categories, type }: Props) => {
 
   const pieChart = () => {
     const amounts = data.map((d) => d.amount);
-
     let pieData;
     if (amounts.length) {
       pieData = data.map((d) => ({
@@ -78,12 +70,10 @@ const CategoryBarChart = ({ transactions, categories, type }: Props) => {
           paddingAngle={1}
           fill="#8884d8"
         >
-          {data.map((_, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
+          {cell}
         </Pie>
         <Tooltip
-          formatter={(value: any, name: any) => [
+          formatter={(value: number, name: string) => [
             value.toLocaleString("en", {
               style: "percent",
             }),
@@ -101,4 +91,4 @@ const CategoryBarChart = ({ transactions, categories, type }: Props) => {
   );
 };
 
-export default CategoryBarChart;
+export default CategoryChart;

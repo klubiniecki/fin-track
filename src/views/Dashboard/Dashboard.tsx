@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import CategoryBarChart from "../../components/CategoryBarChart/CategoryBarChart";
+import CategoryChart from "../../components/CategoryChart/CategoryChart";
 import DateService from "../../services/dateService";
 import RequestService from "../../services/requestService";
 import config from "../../config/config";
@@ -66,7 +66,7 @@ const Dashboard = () => {
     return <LinearProgress className={styles.loader} />;
   }
 
-  return (
+  const datePickers = (
     <>
       <Typography color="textPrimary" variant="h6" className={styles.header}>
         Dates:
@@ -95,36 +95,39 @@ const Dashboard = () => {
         }}
         margin="dense"
       />
+    </>
+  );
+
+  const expansionPanel = (title: string, component: React.ReactNode) => (
+    <ExpansionPanel>
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography color="textPrimary">{title}</Typography>
+      </ExpansionPanelSummary>
+      <ExpansionPanelDetails>{component}</ExpansionPanelDetails>
+    </ExpansionPanel>
+  );
+
+  return (
+    <>
+      {datePickers}
       {transactions.length ? (
         <>
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography color="textPrimary">
-                Expense categories (Total)
-              </Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <CategoryBarChart
-                transactions={transactions}
-                categories={EXPENSE_CATEGORIES}
-                type="bar"
-              />
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography color="textPrimary">
-                Expense categories (%)
-              </Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <CategoryBarChart
-                transactions={transactions}
-                categories={EXPENSE_CATEGORIES}
-                type="pie"
-              />
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+          {expansionPanel(
+            "Expense categories (Total)",
+            <CategoryChart
+              transactions={transactions}
+              categories={EXPENSE_CATEGORIES}
+              type="bar"
+            />
+          )}
+          {expansionPanel(
+            "Expense categories (%)",
+            <CategoryChart
+              transactions={transactions}
+              categories={EXPENSE_CATEGORIES}
+              type="pie"
+            />
+          )}
         </>
       ) : (
         <Typography color="textPrimary">
