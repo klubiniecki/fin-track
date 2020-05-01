@@ -15,8 +15,8 @@ import Saving from "@material-ui/icons/SaveTwoTone";
 import DomainDisabledTwoToneIcon from "@material-ui/icons/DomainDisabledTwoTone";
 import EmojiFoodBeverageTwoToneIcon from "@material-ui/icons/EmojiFoodBeverageTwoTone";
 import LocalLaundryServiceTwoToneIcon from "@material-ui/icons/LocalLaundryServiceTwoTone";
-import LocalSeeTwoToneIcon from "@material-ui/icons/LocalSeeTwoTone";
 import SubscriptionsTwoToneIcon from "@material-ui/icons/SubscriptionsTwoTone";
+import EcoTwoToneIcon from "@material-ui/icons/EcoTwoTone";
 import { TransactionCategory, TransactionType } from "../types/types";
 
 export interface TransactionCategoryAndIcon {
@@ -45,7 +45,7 @@ const TransactionCategories: TransactionCategoryAndIcon[] = [
     icon: <LocalLaundryServiceTwoToneIcon />,
     type: "expense",
   },
-  { name: "Clothes", icon: <LocalSeeTwoToneIcon />, type: "expense" },
+  { name: "Clothes", icon: <EcoTwoToneIcon />, type: "expense" },
   {
     name: "Subscriptions",
     icon: <SubscriptionsTwoToneIcon />,

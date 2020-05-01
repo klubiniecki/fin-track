@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import CategoryChart from "../../components/CategoryChart/CategoryChart";
+import CategoryChart from "../../components/Charts/CategoryChart";
 import DateService from "../../services/dateService";
 import RequestService from "../../services/requestService";
 import config from "../../config/config";
@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import useStyles from "../../utils/useStyles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import RegularChart from "../../components/Charts/RegularChart";
 
 const Dashboard = () => {
   const { today, getMonthRange } = DateService();
@@ -127,6 +128,10 @@ const Dashboard = () => {
               categories={EXPENSE_CATEGORIES}
               type="pie"
             />
+          )}
+          {expansionPanel(
+            "Expense regular (%)",
+            <RegularChart transactions={transactions} />
           )}
         </>
       ) : (

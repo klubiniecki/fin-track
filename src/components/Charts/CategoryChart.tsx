@@ -11,6 +11,7 @@ import {
   Cell,
 } from "recharts";
 import { TransactionInterface, TransactionCategory } from "../../types/types";
+import getArrayOfColors from "../../utils/getArrayOfColors";
 
 interface Props {
   transactions: TransactionInterface[];
@@ -32,8 +33,7 @@ const CategoryChart = ({ transactions, categories, type }: Props) => {
     })
     .filter((data) => data.amount > 0);
 
-  const randomHSL = () => `hsla(${~~(360 * Math.random())},70%,70%,0.8)`;
-  const COLORS = data.map((_) => randomHSL());
+  const COLORS = getArrayOfColors(data.length);
 
   const cell = data.map((_, index) => (
     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
