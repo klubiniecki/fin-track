@@ -15,7 +15,7 @@ import {
   colors,
 } from "@material-ui/core";
 import { TransactionCategory } from "../../types/types";
-import TransactionCategories from "../../components/Transaction/TransactionCategories";
+import TransactionCategories from "../../utils/TransactionCategories";
 import Salary from "@material-ui/icons/MonetizationOnTwoTone";
 import Sales from "@material-ui/icons/ShoppingBasketTwoTone";
 import Saving from "@material-ui/icons/SaveTwoTone";

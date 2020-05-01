@@ -17,7 +17,7 @@ import EmojiFoodBeverageTwoToneIcon from "@material-ui/icons/EmojiFoodBeverageTw
 import LocalLaundryServiceTwoToneIcon from "@material-ui/icons/LocalLaundryServiceTwoTone";
 import LocalSeeTwoToneIcon from "@material-ui/icons/LocalSeeTwoTone";
 import SubscriptionsTwoToneIcon from "@material-ui/icons/SubscriptionsTwoTone";
-import { TransactionCategory, TransactionType } from "../../types/types";
+import { TransactionCategory, TransactionType } from "../types/types";
 
 export interface TransactionCategoryAndIcon {
   name: TransactionCategory;
@@ -29,7 +29,7 @@ const TransactionCategories: TransactionCategoryAndIcon[] = [
   { name: "Groceries", icon: <ShoppingBasket />, type: "expense" },
   { name: "Rent", icon: <HouseTwoToneIcon />, type: "expense" },
   { name: "Fun", icon: <InsertEmoticon />, type: "expense" },
-  { name: "Gaia", icon: <FavoriteBorder />, type: "expense" },
+  { name: "Baby", icon: <FavoriteBorder />, type: "expense" },
   { name: "Car", icon: <DirectionsCar />, type: "expense" },
   { name: "Medical", icon: <LocalHospital />, type: "expense" },
   { name: "Wellness", icon: <ColorLens />, type: "expense" },
@@ -51,15 +51,15 @@ const TransactionCategories: TransactionCategoryAndIcon[] = [
     icon: <SubscriptionsTwoToneIcon />,
     type: "expense",
   },
-  { name: "Other", icon: <OtherExpense />, type: "expense" },
+  { name: "Other expense", icon: <OtherExpense />, type: "expense" },
   { name: "Salary", icon: <Salary />, type: "income" },
   { name: "Sales", icon: <Sales />, type: "income" },
-  { name: "Other", icon: <OtherIncome />, type: "income" },
+  { name: "Other income", icon: <OtherIncome />, type: "income" },
   { name: "Yearly", icon: <Saving />, type: "saving" },
   { name: "Regular", icon: <Saving />, type: "saving" },
-  { name: "Travel", icon: <Saving />, type: "saving" },
+  { name: "Vacations", icon: <Saving />, type: "saving" },
   { name: "Gaia", icon: <Saving />, type: "saving" },
-  { name: "Other", icon: <Saving />, type: "saving" },
+  { name: "Other saving", icon: <Saving />, type: "saving" },
 ];
 
 export default TransactionCategories;

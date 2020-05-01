@@ -8,7 +8,7 @@ import {
   colors,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/DeleteTwoTone";
-import TransactionCategories from "./TransactionCategories";
+import TransactionCategories from "../../utils/TransactionCategories";
 import { TransactionInterface } from "../../types/types";
 import getDisplayDate from "../../utils/getDisplayDate";
 import useStyles from "../../utils/useStyles";

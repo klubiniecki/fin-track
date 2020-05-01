@@ -26,15 +26,20 @@ export type TransactionCategory =
   | ExpenseCategory
   | SavingCategory;
 
-export type SavingCategory = "Regular" | "Travel" | "Yearly" | "Gaia" | "Other";
+export type SavingCategory =
+  | "Regular"
+  | "Vacations"
+  | "Yearly"
+  | "Gaia"
+  | "Other saving";
 
-export type IncomeCategory = "Salary" | "Sales" | "Other";
+export type IncomeCategory = "Salary" | "Sales" | "Other income";
 
 export type ExpenseCategory =
   | "Groceries"
   | "Rent"
   | "Utilities"
-  | "Gaia"
+  | "Baby"
   | "Car"
   | "Travel"
   | "Fun"
@@ -44,4 +49,4 @@ export type ExpenseCategory =
   | "Household"
   | "Clothes"
   | "Subscriptions"
-  | "Other";
+  | "Other expense";
