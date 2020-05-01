@@ -5,9 +5,7 @@ const getDisplayDate = (dateString: string) => {
     (n > 0
       ? ["th", "st", "nd", "rd"][(n > 3 && n < 21) || n % 10 > 3 ? 0 : n % 10]
       : "");
-  const num = new Date(dateString).getDay();
-  const day = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(num);
-
+  const day = new Date(dateString).toLocaleString("en-us", { weekday: "long" });
   return `${date}, ${day}`;
 };
 
