@@ -5,7 +5,6 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  colors,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/DeleteTwoTone";
 import TransactionCategories from "../../utils/TransactionCategories";
@@ -13,6 +12,7 @@ import { TransactionInterface } from "../../types/types";
 import getDisplayDate from "../../utils/getDisplayDate";
 import useStyles from "../../utils/useStyles";
 import getTypeFromCategory from "../../utils/getTypeFromCategory";
+import getColorFromType from "../../utils/getColorFromType";
 
 interface Props {
   transaction: TransactionInterface;
@@ -33,12 +33,7 @@ const Transaction = ({ transaction, onDelete }: Props) => {
       TransactionCategories.find((c) => c.name === category)!.icon
     );
 
-  const color =
-    type === "expense"
-      ? colors.blue[600]
-      : type === "income"
-      ? colors.green[600]
-      : colors.orange[600];
+  const color = getColorFromType(type);
 
   const styles = useStyles({
     item: {

@@ -14,6 +14,7 @@ import RequestService from "../../services/requestService";
 import useStyles from "../../utils/useStyles";
 import EventIcon from "@material-ui/icons/EventTwoTone";
 import getTypeFromCategory from "../../utils/getTypeFromCategory";
+import TransactionsTotal from "../TransactionsTotal/TransactionsTotal";
 
 interface Props {
   startDate: string;
@@ -118,6 +119,7 @@ const MonthlyTransactions = ({
       </Typography>
       <Card>
         <CardContent>
+          <TransactionsTotal transactions={transactions} />
           <List dense disablePadding>
             {transactions.map((t: TransactionInterface) => (
               <Transaction

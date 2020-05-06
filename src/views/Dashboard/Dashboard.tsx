@@ -12,16 +12,24 @@ import {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
   LinearProgress,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  colors,
 } from "@material-ui/core";
 import useStyles from "../../utils/useStyles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import RegularChart from "../../components/Charts/RegularChart";
+import Salary from "@material-ui/icons/MonetizationOnTwoTone";
+import Sales from "@material-ui/icons/ShoppingBasketTwoTone";
+import Saving from "@material-ui/icons/SaveTwoTone";
 
 const Dashboard = () => {
   const { today, getMonthRange } = DateService();
   const { startDate, endDate } = getMonthRange(today);
 
   const [start, setStart] = useState(startDate);
+  const [type, setType] = useState("expense");
   const [end, setEnd] = useState(endDate);
   const [transactions, setTransactions] = useState<null | ExpenseInterface[]>(
     null
@@ -30,11 +38,11 @@ const Dashboard = () => {
 
   const fetchTransactions = useCallback(async () => {
     const res = await RequestService().get(
-      `${config.apiUrl}/expenses?startDate=${start}&endDate=${end}`
+      `${config.apiUrl}/${type}s?startDate=${start}&endDate=${end}`
     );
     setTransactions(res.data);
     setError(res.error);
-  }, [end, start]);
+  }, [end, start, type]);
 
   useEffect(() => {
     fetchTransactions();
@@ -47,11 +55,45 @@ const Dashboard = () => {
     date: {
       marginRight: 10,
       marginTop: 0,
-      marginBottom: 20,
+      marginBottom: 8,
       width: 140,
     },
     loader: {
       margin: "16px 0",
+    },
+    expense: {
+      marginRight: 20,
+      "& *": {
+        color: colors.blue[600],
+      },
+      "& .MuiFormControlLabel-label": {
+        marginTop: 5,
+      },
+    },
+    income: {
+      marginRight: 20,
+      "& *": {
+        color: colors.green[600],
+      },
+      "& .MuiFormControlLabel-label": {
+        marginTop: 5,
+      },
+    },
+    saving: {
+      marginRight: 20,
+      "& *": {
+        color: colors.orange[600],
+      },
+      "& .MuiFormControlLabel-label": {
+        marginTop: 5,
+      },
+    },
+    type: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      width: "100%",
+      marginBottom: 8,
     },
   });
 
@@ -99,6 +141,37 @@ const Dashboard = () => {
     </>
   );
 
+  const handleTypeChange = (ev: React.ChangeEvent<unknown>) =>
+    setType((ev.target as HTMLInputElement).value);
+
+  const typeControls = (
+    <RadioGroup
+      name="transaction"
+      value={type}
+      onChange={handleTypeChange}
+      className={styles.type}
+    >
+      <FormControlLabel
+        className={styles.expense}
+        value="expense"
+        control={<Radio color="primary" />}
+        label={<Sales color="primary" />}
+      />
+      <FormControlLabel
+        className={styles.income}
+        value="income"
+        control={<Radio color="primary" />}
+        label={<Salary color="primary" />}
+      />
+      <FormControlLabel
+        className={styles.saving}
+        value="saving"
+        control={<Radio color="primary" />}
+        label={<Saving color="primary" />}
+      />
+    </RadioGroup>
+  );
+
   const expansionPanel = (title: string, component: React.ReactNode) => (
     <ExpansionPanel>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -108,32 +181,46 @@ const Dashboard = () => {
     </ExpansionPanel>
   );
 
+  const expenseDashboard = (
+    <>
+      {expansionPanel(
+        "Expense categories (Total)",
+        <CategoryChart
+          transactions={transactions}
+          categories={EXPENSE_CATEGORIES}
+          type="bar"
+        />
+      )}
+      {expansionPanel(
+        "Expense categories (%)",
+        <CategoryChart
+          transactions={transactions}
+          categories={EXPENSE_CATEGORIES}
+          type="pie"
+        />
+      )}
+      {expansionPanel(
+        "Expense regular (%)",
+        <RegularChart transactions={transactions} />
+      )}
+    </>
+  );
+
+  const savingDashboard = <div>saving dash</div>;
+  const incomeDashboard = <div>income dash</div>;
+
   return (
     <>
       {datePickers}
+      {typeControls}
       {transactions.length ? (
-        <>
-          {expansionPanel(
-            "Expense categories (Total)",
-            <CategoryChart
-              transactions={transactions}
-              categories={EXPENSE_CATEGORIES}
-              type="bar"
-            />
-          )}
-          {expansionPanel(
-            "Expense categories (%)",
-            <CategoryChart
-              transactions={transactions}
-              categories={EXPENSE_CATEGORIES}
-              type="pie"
-            />
-          )}
-          {expansionPanel(
-            "Expense regular (%)",
-            <RegularChart transactions={transactions} />
-          )}
-        </>
+        type === "expense" ? (
+          expenseDashboard
+        ) : type === "income" ? (
+          incomeDashboard
+        ) : (
+          savingDashboard
+        )
       ) : (
         <Typography color="textPrimary">
           No transactions for selected dates.

@@ -14,7 +14,7 @@ import {
   TextField,
   colors,
 } from "@material-ui/core";
-import { TransactionCategory } from "../../types/types";
+import { TransactionCategory, TransactionType } from "../../types/types";
 import TransactionCategories from "../../utils/TransactionCategories";
 import Salary from "@material-ui/icons/MonetizationOnTwoTone";
 import Sales from "@material-ui/icons/ShoppingBasketTwoTone";
@@ -23,6 +23,7 @@ import RequestService from "../../services/requestService";
 import config from "../../config/config";
 import useStyles from "../../utils/useStyles";
 import DateService from "../../services/dateService";
+import getColorFromType from "../../utils/getColorFromType";
 
 type Ev = React.ChangeEvent<HTMLInputElement>;
 const { today, formatted } = DateService();
@@ -40,12 +41,7 @@ const AddTransaction = () => {
 
   const { type, name, amount, category, date, regular } = transaction;
 
-  const color =
-    type === "expense"
-      ? colors.blue[600]
-      : type === "income"
-      ? colors.green[600]
-      : colors.orange[600];
+  const color = getColorFromType(type as TransactionType);
 
   const styles = useStyles({
     expense: {
