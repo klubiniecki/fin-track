@@ -4,7 +4,7 @@ import DateService from "../../services/dateService";
 import RequestService from "../../services/requestService";
 import config from "../../config/config";
 import { EXPENSE_CATEGORIES } from "../../utils/constants";
-import { ExpenseInterface } from "../../types/types";
+import { TransactionInterface } from "../../types/types";
 import {
   TextField,
   Typography,
@@ -31,9 +31,9 @@ const Dashboard = () => {
   const [start, setStart] = useState(startDate);
   const [type, setType] = useState("expense");
   const [end, setEnd] = useState(endDate);
-  const [transactions, setTransactions] = useState<null | ExpenseInterface[]>(
-    null
-  );
+  const [transactions, setTransactions] = useState<
+    null | TransactionInterface[]
+  >(null);
   const [error, setError] = useState(null);
 
   const fetchTransactions = useCallback(async () => {
@@ -93,7 +93,12 @@ const Dashboard = () => {
       flexDirection: "row",
       alignItems: "center",
       width: "100%",
-      marginBottom: 8,
+      marginTop: 8,
+      marginBottom: 16,
+    },
+    list: {
+      display: "flex",
+      flexDirection: "column",
     },
   });
 
@@ -141,14 +146,11 @@ const Dashboard = () => {
     </>
   );
 
-  const handleTypeChange = (ev: React.ChangeEvent<unknown>) =>
-    setType((ev.target as HTMLInputElement).value);
-
   const typeControls = (
     <RadioGroup
       name="transaction"
       value={type}
-      onChange={handleTypeChange}
+      onChange={(ev) => setType((ev.target as HTMLInputElement).value)}
       className={styles.type}
     >
       <FormControlLabel
@@ -181,10 +183,25 @@ const Dashboard = () => {
     </ExpansionPanel>
   );
 
+  const expenseList = (transactions: TransactionInterface[]) => {
+    return (
+      <div className={styles.list}>
+        {transactions
+          .sort((a, b) => b.amount - a.amount)
+          .map((t) => (
+            <Typography key={t._id}>
+              {t.name} (${t.amount})
+            </Typography>
+          ))}
+      </div>
+    );
+  };
+
   const expenseDashboard = (
     <>
+      {expansionPanel("List (High - Low)", expenseList(transactions))}
       {expansionPanel(
-        "Expense categories (Total)",
+        "Categories (Total)",
         <CategoryChart
           transactions={transactions}
           categories={EXPENSE_CATEGORIES}
@@ -192,7 +209,7 @@ const Dashboard = () => {
         />
       )}
       {expansionPanel(
-        "Expense categories (%)",
+        "Categories (%)",
         <CategoryChart
           transactions={transactions}
           categories={EXPENSE_CATEGORIES}
@@ -200,7 +217,7 @@ const Dashboard = () => {
         />
       )}
       {expansionPanel(
-        "Expense regular (%)",
+        "Regular (%)",
         <RegularChart transactions={transactions} />
       )}
     </>
